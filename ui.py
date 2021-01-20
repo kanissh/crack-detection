@@ -60,24 +60,21 @@ def resize(image_original):
 
         window_resize['-IMAGE-'].update(data=im_new)
 
-        window_slider = sg.Window(title='', layout=layout_slider)  # TODO: give title name
+        window_slider = sg.Window(title='', layout=layout_slider)
 
         while True:
             window_resize.read(timeout=50)
             event3, values3 = window_slider.read()
 
-            print(values3)
-
-            if event3 == sg.WIN_CLOSED:  # TODO: handle this more effectively
+            if event3 == sg.WIN_CLOSED:
                 break
             elif event3 == 'Done resizing':
                 window_resize.close()
                 window_slider.close()
 
-            # resize image TODO: separate into a function
+            # resize image
 
             scale_factor = values3['-SLIDER-']
-            print(scale_factor)
             width = int(image_original.shape[1] * scale_factor / 100)
             height = int(image_original.shape[0] * scale_factor / 100)
             dim = (width, height)
@@ -153,14 +150,14 @@ def mark_crack(image):
             contour_area = validate_contour_area(area)
         elif event_sliders == 'Show':
             img = methods.draw_contour_on_image(image, output_image)
-            cv.imshow('', img)
+            cv.imshow('Output Image', img)
             cv.waitKey()
 
         alpha = values_sliders['-ALPHA-']
         beta = values_sliders['-BETA-']
         gamma = values_sliders['-GAMMA-']
 
-        output_image = mark_crack_method(image=image_bw, alpha=alpha, beta=beta, gamma=(gamma / 100),
+        output_image = mark_crack_method(image=image_bw, alpha=alpha, beta=beta, gamma=(gamma/100),
                                          contour_area=contour_area)
         output_image_png = cv.imencode('.png', output_image)[1].tobytes()
         window_im['-IMAGE-'].update(data=output_image_png)
@@ -173,7 +170,7 @@ def validate_contour_area(input_string):
     try:
         float(input_string)
     except ValueError:
-        sg.popup_error('Invalid input\nPlease Try Again\n\n\nContour Area set to 100', title='Error') #TODO: set error window properly
+        sg.popup_error('Invalid input\nPlease Try Again\n\n\nContour Area set to 100', title='Error')
         return 100
     else:
         return float(input_string)
