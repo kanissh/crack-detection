@@ -9,3 +9,7 @@ PySimpleGUI | 4.30.0
 # Getting Started
 1. Clone this repository.
 1. Run the `ui.py` file.
+
+## OR
+1. Download the latest release.
+1. Run the `ui.py` file.
