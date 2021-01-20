@@ -1,4 +1,4 @@
-# Crack detection on concrete surfaces
+# Crack detection on Concrete Surfaces
 ## Python Package Requirements
 Requirements| Version|
 -------------|--------|
